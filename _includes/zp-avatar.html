@@ -1,0 +1,12 @@
+{%- comment -%}
+Zero Prime's avatar: a cartoon helmet, one human eye and one machine eye.
+With mark=true, the small mark beside the name in the menu, hidden from
+screen readers because the name is next to it. Without, the full avatar of
+the home page, with its antenna and circuits; its machine eye pulses with
+CSS, so reduced motion stops it.
+{%- endcomment -%}
+{%- if include.mark -%}
+<svg class="mark" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="124" r="96" fill="#1C1507" stroke="#000" stroke-width="10"/><path d="M120 40 A84 84 0 0 0 120 208 Z" fill="#F8DFAC"/><path d="M120 40 A84 84 0 0 1 120 208 Z" fill="#3A2A0E"/><circle cx="86" cy="112" r="16" fill="#fff" stroke="#000" stroke-width="6"/><circle cx="90" cy="113" r="7"/><circle cx="154" cy="112" r="18" fill="#000"/><circle cx="154" cy="112" r="11" fill="#FFB300"/></svg>
+{%- else -%}
+<svg class="avatar-art" viewBox="0 0 240 240" role="img" aria-label="Zero Prime, a cartoon helmet: one human eye, one machine eye"><circle cx="120" cy="124" r="96" fill="#1C1507" stroke="#000" stroke-width="6"/><line x1="120" y1="28" x2="120" y2="6" stroke="#000" stroke-width="6"/><circle cx="120" cy="8" r="9" fill="#FF5A3C" stroke="#000" stroke-width="4"/><path d="M120 40 A84 84 0 0 0 120 208 Z" fill="#F8DFAC" stroke="#000" stroke-width="5"/><path d="M120 40 A84 84 0 0 1 120 208 Z" fill="#3A2A0E" stroke="#000" stroke-width="5"/><path d="M134 70 h30 v14 h18 M134 176 h22 v-16 h26 M150 120 h40" stroke="#FFB300" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="86" cy="112" rx="18" ry="14" fill="#fff" stroke="#000" stroke-width="5"/><circle cx="90" cy="113" r="7"/><circle cx="93" cy="110" r="2.5" fill="#fff"/><circle cx="154" cy="112" r="20" fill="#000"/><circle class="iris" cx="154" cy="112" r="13" fill="#FFB300"/><path d="M78 156 q20 16 42 4" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+{%- endif -%}

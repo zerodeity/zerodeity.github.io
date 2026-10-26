@@ -470,7 +470,7 @@ main.page > :first-child { margin-top: 0; }
    Eight thin gradients draw the four corners; --c is their colour and
    --panel-bg the fill beneath. Shared by every framed component. */
 
-.hud-panel, .system, .mode, .capture, .console, .project-card, .op {
+.hud-panel, .system, .mode, .capture, .console, .op {
   --c: var(--accent);
   --len: 14px;
   --w: 2px;
@@ -1086,74 +1086,6 @@ img[src*="captures/"] {
 .docs-pager a:hover { color: var(--accent); border-color: var(--accent); }
 .docs-pager-next { grid-column: 2; text-align: right; }
 
-/* ---------- Resume ---------- */
-
-.projects {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.2rem;
-  margin: 1.6rem 0;
-}
-.project-card {
-  --panel-bg: rgba(18, 13, 4, .88);
-  padding: 1.6rem 1.5rem 1.4rem;
-  border-color: var(--accent-a45);
-  box-shadow: 0 0 30px rgba(255, 179, 0, .06);
-}
-.project-card > :first-child {
-  margin: 0;
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: .3em;
-  color: var(--accent);
-  text-shadow: var(--glow);
-  border: 0;
-  padding: 0;
-}
-.project-card > h2:first-child::before, .project-card > h3:first-child::before { content: none; }
-.project-card p { margin: .7em 0 1em; }
-.project-card .tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem;
-  margin: 0 0 1rem;
-  padding: 0;
-}
-.project-card .tags > * {
-  margin: 0;
-  padding: .15em .6em;
-  font-size: .68rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  list-style: none;
-}
-.project-card .tags > li::before { content: none; }
-.project-card .links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .3rem 1.4rem;
-  margin: 0;
-  padding: 0;
-  font-size: .86rem;
-}
-.project-card .links > li { margin: 0; }
-.project-card .links > li::before { content: none; }
-.project-card .links a::before { content: "▸ "; }
-.project-slot {
-  display: grid;
-  place-items: center;
-  min-height: 190px;
-  padding: 1.5rem;
-  font-size: .74rem;
-  letter-spacing: .3em;
-  text-align: center;
-  color: var(--muted);
-  border: 1px dashed var(--line);
-  background: repeating-linear-gradient(135deg, rgba(58, 42, 14, .18) 0 8px, transparent 8px 16px);
-}
-
 /* ---------- Motion ---------- */
 
 @keyframes hud-spin { to { transform: rotate(360deg); } }
@@ -1189,7 +1121,7 @@ img[src*="captures/"] {
 
 @media (max-width: 640px) {
   html { font-size: 14.5px; }
-  .systems, .modes, .docs-dir, .projects, .ops { grid-template-columns: minmax(0, 1fr); }
+  .systems, .modes, .docs-dir, .ops { grid-template-columns: minmax(0, 1fr); }
   .topbar-inner { gap: .3rem 1rem; }
   .brand { letter-spacing: .3em; }
   .topnav { width: 100%; margin-left: 0; justify-content: space-between; gap: .2rem .9rem; font-size: .68rem; letter-spacing: .14em; }
@@ -1215,39 +1147,4 @@ img[src*="captures/"] {
     scroll-behavior: auto !important;
   }
   .crt::after, .hero::after { display: none; }
-}
-
-/* ---------- Resume header ----------
-   Wide screens show the SVG banner. On a phone its small text would shrink to
-   about 5 px, so the same words show as real text instead. The text stays in
-   the page for screen readers when the banner is shown. */
-
-.zp-head { margin: 0 0 1rem; }
-.zp-banner { display: none; width: 100%; height: auto; border: 1px solid var(--line); }
-.zp-text {
-  padding: 1.6rem 1.2rem 1.3rem;
-  border: 1px solid var(--line);
-  background: radial-gradient(circle at 20% 30%, var(--surface-2, #1C1507) 0%, var(--bg, #070502) 65%);
-}
-.zp-text h1 {
-  margin: 0;
-  font-size: clamp(1.7rem, 9vw, 2.6rem);
-  letter-spacing: .2em;
-  color: var(--accent);
-  text-shadow: var(--glow);
-  overflow-wrap: anywhere;
-}
-.zp-text p { margin: .5rem 0 0; }
-.zp-handle { font-size: .72rem; letter-spacing: .24em; color: var(--muted); }
-.zp-bio { font-size: .95rem; color: var(--highlight, #FFE68F); }
-.zp-stat { font-size: .68rem; letter-spacing: .16em; color: var(--muted); }
-.zp-stat b { color: var(--accent); }
-.zp-log { font-size: .86rem; line-height: 1.9; color: var(--muted); }
-.zp-log b { color: var(--accent); }
-@media (min-width: 900px) {
-  .zp-banner { display: block; }
-  .zp-text {
-    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-  }
 }

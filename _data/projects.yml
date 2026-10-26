@@ -1,7 +1,9 @@
-# The projects on the resume page. Add an entry to show another card;
-# the "next project" slot follows the last one.
+# The constructs on Zero Prime's Constructs page. Add an entry to show
+# another card; the "next construct" slot follows the last one. icon names
+# a Tabler icon of the sprite in assets/icons.svg.
 - name: AURELION
-  tagline: A terminal AI coding agent that plans, edits, tests and undoes, in one cockpit. macOS and Linux, signed releases.
+  icon: cpu
+  tagline: An AI pilot for your terminal. Plans, codes, tests itself, and rewinds time when it trips.
   tags: [AI AGENT, TERMINAL, RUST, MACOS, LINUX]
   links:
     website: https://zerodeity.github.io/aurelion/

@@ -1,5 +1,6 @@
-# zerodeity.github.io: the Zero Prime resume at /, AURELION's landing page
-# at /aurelion/ and its docs at /aurelion/docs/<page>/.
+# zerodeity.github.io: Zero Prime's pages at / (/, /whoami/, /legend/ …),
+# AURELION's landing page at /aurelion/ and its docs at
+# /aurelion/docs/<page>/.
 #
 # GitHub Pages builds this with its default plugins. The ones the theme
 # relies on are named below, so that a plain local `jekyll build` behaves
@@ -36,12 +37,13 @@ optional_front_matter:
 readme_index:
   remove_originals: true
 
-# The most specific path wins.
+# The most specific path wins. AURELION's landing page names the zp
+# layout in its front matter.
 defaults:
   - scope:
       path: ""
     values:
-      layout: resume
+      layout: zp
   - scope:
       path: aurelion
     values:

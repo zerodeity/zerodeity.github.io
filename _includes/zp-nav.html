@@ -1,0 +1,28 @@
+{%- comment -%}
+The left menu of the zp layout: Zero Prime's pages, then AURELION's. Each
+entry of zn_pages is "address|icon|name". The current page is marked with
+aria-current, and zp.js jumps to the entry whose data-key is the number
+key pressed. Docs and Releases leave this style, so they carry the
+external mark. Variables start with zn_ because an include shares the
+page's variables.
+{%- endcomment -%}
+{%- assign zn_pages = "/|home|Home;/whoami/|fingerprint|whoami;/legend/|sparkles|Legend;/origin/|book-2|Origin story;/powers/|bolt|Superpowers;/constructs/|rocket|Constructs;/transmissions/|broadcast|Transmissions;/terminal/|terminal-2|Terminal" | split: ";" -%}
+<nav class="side" id="site-nav" aria-label="Site">
+  <a class="brand" href="{{ '/' | relative_url }}">{% include zp-avatar.html mark=true %}ZERO PRIME</a>
+  <p class="status">STATUS <b>{% include zp-icon.html i="point-filled" %} ONLINE</b></p>
+  <p class="grp" id="nav-zp">// ZERO PRIME</p>
+  <ul class="nav" aria-labelledby="nav-zp">
+    {%- for zn_entry in zn_pages %}
+    {%- assign zn = zn_entry | split: "|" %}
+    {%- assign zn_icon = zn[1] %}
+    <li><a href="{{ zn[0] | relative_url }}" data-key="{{ forloop.index }}"{% if page.url == zn[0] %} aria-current="page"{% endif %}><span class="i">{% include zp-icon.html i=zn_icon %}</span>{{ zn[2] }}<span class="k" aria-hidden="true">{{ forloop.index }}</span></a></li>
+    {%- endfor %}
+  </ul>
+  <p class="grp" id="nav-au">// AURELION</p>
+  <ul class="nav" aria-labelledby="nav-au">
+    <li><a href="{{ '/aurelion/' | relative_url }}" data-key="9"{% if page.url == '/aurelion/' %} aria-current="page"{% endif %}><span class="i">{% include zp-icon.html i="cpu" %}</span>AURELION<span class="k" aria-hidden="true">9</span></a></li>
+    <li><a href="{{ '/aurelion/docs/' | relative_url }}"><span class="i">{% include zp-icon.html i="book" %}</span>Docs <span class="ext">{% include zp-icon.html i="external-link" %}</span></a></li>
+    <li><a href="https://github.com/zerodeity/aurelion-dist/releases"><span class="i">{% include zp-icon.html i="download" %}</span>Releases <span class="ext">{% include zp-icon.html i="external-link" %}</span></a></li>
+  </ul>
+  <p class="navfoot"><span class="js-only">Press 1–9 to jump.<br>Try the Konami code.<br><br></span><a href="https://github.com/zerodeity">github.com/zerodeity</a></p>
+</nav>
