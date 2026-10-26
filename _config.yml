@@ -1,0 +1,61 @@
+# zerodeity.github.io: the Zero Prime resume at /, AURELION's landing page
+# at /aurelion/ and its docs at /aurelion/docs/<page>/.
+#
+# GitHub Pages builds this with its default plugins. The ones the theme
+# relies on are named below, so that a plain local `jekyll build` behaves
+# the same: Markdown without front matter becomes a page, a README is the
+# index of a folder without one, the first heading is the title, and .md
+# links point at the built pages.
+title: Zero Prime
+description: Architecting autonomous intelligence for the post-human era.
+url: https://zerodeity.github.io
+baseurl: ""
+permalink: pretty
+# No GitHub Pages default theme: these layouts and assets are the whole look.
+theme: null
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-titles-from-headings
+  - jekyll-relative-links
+  - jekyll-default-layout
+
+relative_links:
+  enabled: true
+  collections: false
+
+# Publish the built pages only, not their Markdown sources as well.
+optional_front_matter:
+  remove_originals: true
+readme_index:
+  remove_originals: true
+
+# The most specific path wins.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: resume
+  - scope:
+      path: aurelion
+    values:
+      layout: default
+  - scope:
+      path: aurelion/docs
+    values:
+      layout: docs
+
+# READMEs that are only for github.com. aurelion/docs/README.md is not one
+# of them: it is the docs index and the sidebar's source.
+exclude:
+  - README.md
+  - aurelion/README.md
+  - assets/svg/**/README.md
+  - Gemfile
+  - Gemfile.lock

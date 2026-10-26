@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<div class="docs-shell">
+  {% include docs-nav.html %}
+  <article class="doc hud-panel">
+    <p class="doc-crumbs"><span><a href="{{ '/aurelion/' | relative_url }}">AURELION</a> / <a href="{{ '/aurelion/docs/' | relative_url }}">DOCS</a></span><a class="doc-crumbs-nav" href="#docs-nav">DIRECTORY ▾</a></p>
+    {{ content }}
+    {% include docs-nav.html pager=true %}
+  </article>
+</div>

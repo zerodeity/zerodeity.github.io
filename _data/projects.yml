@@ -1,0 +1,10 @@
+# The projects on the resume page. Add an entry to show another card;
+# the "next project" slot follows the last one.
+- name: AURELION
+  tagline: A terminal AI coding agent that plans, edits, tests and undoes, in one cockpit. macOS and Linux, signed releases.
+  tags: [AI AGENT, TERMINAL, RUST, MACOS, LINUX]
+  links:
+    website: https://zerodeity.github.io/aurelion/
+    install: https://zerodeity.github.io/aurelion/#boot-sequence
+    docs: https://zerodeity.github.io/aurelion/docs/getting-started/
+    releases: https://github.com/zerodeity/aurelion-dist/releases

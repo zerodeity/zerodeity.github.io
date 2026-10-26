@@ -1,0 +1,89 @@
+{%- comment -%}
+The docs sidebar; with pager=true, the previous and next links instead.
+
+The order is the docs index: README.md in the page's folder, read top to
+bottom, one entry per link to a .md page in that folder, titled with the
+link text. Without a README, the folder's pages in file order. Variables
+start with dn_ because an include shares the page's variables.
+{%- endcomment -%}
+{%- assign dn_file = page.path | split: "/" | last -%}
+{%- assign dn_dir_len = page.path | size | minus: dn_file.size -%}
+{%- assign dn_dir = page.path | slice: 0, dn_dir_len -%}
+{%- assign dn_readme = dn_dir | append: "README.md" -%}
+{%- assign dn_index = site.pages | where: "path", dn_readme | first -%}
+{%- assign dn_paths = "" -%}
+{%- assign dn_titles = "" -%}
+{%- if dn_index -%}
+  {%- capture dn_raw -%}{% include_relative README.md %}{%- endcapture -%}
+  {%- assign dn_chunks = dn_raw | split: "](" -%}
+  {%- for dn_chunk in dn_chunks offset: 1 -%}
+    {%- assign dn_target = dn_chunk | split: ")" | first | strip -%}
+    {%- assign dn_ext = dn_target | slice: -3, 3 -%}
+    {%- if dn_ext != ".md" or dn_target contains "/" or dn_target contains ":" or dn_target contains "#" or dn_target == "README.md" -%}{%- continue -%}{%- endif -%}
+    {%- assign dn_title = dn_chunks[forloop.index0] | split: "[" | last | strip -%}
+    {%- assign dn_paths = dn_paths | append: dn_dir | append: dn_target | append: "|" -%}
+    {%- assign dn_titles = dn_titles | append: dn_title | append: "|" -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- assign dn_found_pages = site.pages | where_exp: "p", "p.path contains dn_dir" | sort: "path" -%}
+  {%- for dn_p in dn_found_pages -%}
+    {%- assign dn_paths = dn_paths | append: dn_p.path | append: "|" -%}
+    {%- assign dn_titles = dn_titles | append: dn_p.title | append: "|" -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign dn_path_list = dn_paths | split: "|" -%}
+{%- assign dn_title_list = dn_titles | split: "|" -%}
+
+{%- if include.pager -%}
+  {%- assign dn_prev = nil -%}
+  {%- assign dn_prev_title = "" -%}
+  {%- assign dn_next = nil -%}
+  {%- assign dn_next_title = "" -%}
+  {%- assign dn_found = false -%}
+  {%- if dn_index and page.url == dn_index.url -%}{%- assign dn_found = true -%}{%- endif -%}
+  {%- assign dn_last = dn_index -%}
+  {%- assign dn_last_title = "Index" -%}
+  {%- for dn_path in dn_path_list -%}
+    {%- assign dn_page = site.pages | where: "path", dn_path | first -%}
+    {%- unless dn_page -%}{%- continue -%}{%- endunless -%}
+    {%- if dn_found -%}
+      {%- assign dn_next = dn_page -%}
+      {%- assign dn_next_title = dn_title_list[forloop.index0] -%}
+      {%- break -%}
+    {%- endif -%}
+    {%- if dn_page.url == page.url -%}
+      {%- assign dn_prev = dn_last -%}
+      {%- assign dn_prev_title = dn_last_title -%}
+      {%- assign dn_found = true -%}
+    {%- endif -%}
+    {%- assign dn_last = dn_page -%}
+    {%- assign dn_last_title = dn_title_list[forloop.index0] -%}
+  {%- endfor -%}
+  {%- if dn_prev or dn_next %}
+<nav class="docs-pager" aria-label="Previous and next page">
+  {%- if dn_prev %}
+  <a class="docs-pager-prev" href="{{ dn_prev.url | relative_url }}"><span>◂ PREVIOUS</span>{{ dn_prev_title | escape }}</a>
+  {%- else %}
+  <span></span>
+  {%- endif %}
+  {%- if dn_next %}
+  <a class="docs-pager-next" href="{{ dn_next.url | relative_url }}"><span>NEXT ▸</span>{{ dn_next_title | escape }}</a>
+  {%- endif %}
+</nav>
+  {%- endif -%}
+{%- else %}
+<nav class="docs-nav" id="docs-nav" aria-label="Docs">
+  <p class="docs-nav-title">◢ DOCS DIRECTORY</p>
+  <ol>
+    {%- if dn_index %}
+    <li class="docs-nav-index"><a href="{{ dn_index.url | relative_url }}"{% if page.url == dn_index.url %} aria-current="page"{% endif %}>Index</a></li>
+    {%- endif %}
+    {%- for dn_path in dn_path_list %}
+    {%- assign dn_page = site.pages | where: "path", dn_path | first %}
+    {%- if dn_page %}
+    <li><a href="{{ dn_page.url | relative_url }}"{% if page.url == dn_page.url %} aria-current="page"{% endif %}>{{ dn_title_list[forloop.index0] | escape }}</a></li>
+    {%- endif %}
+    {%- endfor %}
+  </ol>
+</nav>
+{%- endif -%}
